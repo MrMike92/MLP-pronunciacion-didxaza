@@ -28,8 +28,8 @@ for input_folder, output_folder in zip(input_folders, output_folders):
                 audio = np.mean(audio, axis=1) # Convertir a mono promediando los canales
             
             # Calcular el tamaño de la ventana en muestras
-            n_fft = int(window_duration * samplerate)  # Número de puntos FFT
-            hop_length = int(n_fft * (1 - overlap))  # Salto entre ventanas
+            n_fft = int(window_duration * samplerate) # Número de puntos FFT
+            hop_length = int(n_fft * (1 - overlap)) # Salto entre ventanas
             
             for n_mels in n_mels_range:
                 descriptors_folder = os.path.join(output_folder, "descriptores", f"{n_mels}")
@@ -75,7 +75,6 @@ for input_folder, output_folder in zip(input_folders, output_folders):
                     fig.savefig(solo_path, bbox_inches='tight', pad_inches=0)
                     plt.close(fig)
                     
-                    # Recortar la imagen para eliminar bordes sobrantes
                     with Image.open(solo_path) as img:
                         img_cropped = img.crop(img.getbbox())
                         img_cropped.save(solo_path)
@@ -85,3 +84,5 @@ for input_folder, output_folder in zip(input_folders, output_folders):
             print(f"El archivo '{filename}' de '{input_folder}' debe de estar en .wav - No fue procesado")
 
 print("Obtenido los espectrogramas MEL de todos los audios.")
+
+# Copyright (c) 2024 MrMike92

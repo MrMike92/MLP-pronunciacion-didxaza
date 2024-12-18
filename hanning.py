@@ -32,12 +32,10 @@ for input_folder, output_folder in zip(input_folders, output_folders):
             # Calcular el tamaño de la ventana en muestras
             nperseg = int(window_duration * samplerate)
             noverlap = int(nperseg * overlap)
-            
-            # Calcular el espectrograma
             f, t, Sxx = spectrogram(audio, fs=samplerate, window=window_type, 
-                                    nperseg=nperseg, noverlap=noverlap, scaling='density')
+                                    nperseg=nperseg, noverlap=noverlap, scaling='density') # Calcular el espectrograma
             
-            Sxx_dB = 10 * np.log10(Sxx + 1e-10)  # Convertir a dB y agregar 1e-10 para evitar log(0)
+            Sxx_dB = 10 * np.log10(Sxx + 1e-10) # Convertir a dB y agregar 1e-10 para evitar log(0)
             plt.figure(figsize=(10, 4))
             plt.pcolormesh(t, f, Sxx_dB, shading='gouraud')
             plt.colorbar(label='Intensidad (dB)')
@@ -53,3 +51,5 @@ for input_folder, output_folder in zip(input_folders, output_folders):
             print(f"El archivo '{filename}' de '{input_folder}' debe de estar en .wav - No fue procesado");
 
 print("Obtenido los espectrogramas Hann de todos los audios.")
+
+# Copyright (c) 2024 MrMike92
